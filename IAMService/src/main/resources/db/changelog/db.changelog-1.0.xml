@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="1" author="Anh">
+        <createTable tableName="tb_user">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_tb_user"/>
+            </column>
+            <column name="username" type="VARCHAR(255)"/>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="dob" type="VARCHAR(255)"/>
+            <column name="address" type="VARCHAR(255)"/>
+            <column name="mobile" type="VARCHAR(255)"/>
+            <column name="confirm" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="token" type="VARCHAR(255)"/>
+        </createTable>
+        <addUniqueConstraint columnNames="email" constraintName="uc_tb_user_email" tableName="tb_user"/>
+        <addUniqueConstraint columnNames="username" constraintName="uc_tb_user_username" tableName="tb_user"/>
+        <createTable tableName="token">
+            <column name="id" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_token"/>
+            </column>
+            <column name="token" type="VARCHAR(255)"/>
+            <column name="token_type" type="VARCHAR(255)"/>
+            <column name="revoked" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="expired" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="INT"/>
+        </createTable>
+        <addUniqueConstraint columnNames="token" constraintName="uc_token_token" tableName="token"/>
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="token" constraintName="FK_TOKEN_ON_USER" referencedColumnNames="id" referencedTableName="tb_user"/>
+
+    </changeSet>
+
+
+</databaseChangeLog>
