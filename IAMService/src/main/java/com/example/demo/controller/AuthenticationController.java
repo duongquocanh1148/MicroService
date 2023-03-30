@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.security.RolesAllowed;
 import javax.mail.MessagingException;
 import java.io.UnsupportedEncodingException;
 
@@ -18,13 +17,10 @@ import java.io.UnsupportedEncodingException;
 @RequestMapping("v2")
 public class AuthenticationController {
     @Autowired
-    private  AuthenticateService authenticateService;
-
+    private AuthenticateService authenticateService;
 
     @Autowired
     private RegisterService registerService;
-
-
 
     @PostMapping("/register")
 
@@ -54,7 +50,6 @@ public class AuthenticationController {
     ) {
         return ResponseEntity.ok(authenticateService.authenticate(request));
     }
-
 
 
 }
