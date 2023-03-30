@@ -10,24 +10,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.security.RolesAllowed;
 import javax.mail.MessagingException;
 import java.io.UnsupportedEncodingException;
 
 @RestController
-@RequestMapping("/api/v1/auth")
+@RequestMapping("v2")
 public class AuthenticationController {
     @Autowired
-    private final AuthenticateService authenticateService;
+    private  AuthenticateService authenticateService;
 
 
     @Autowired
     private RegisterService registerService;
 
-    public AuthenticationController(AuthenticateService authenticateService) {
-        this.authenticateService = authenticateService;
-    }
+
 
     @PostMapping("/register")
+
     public ResponseEntity<ResponseObject> register(
             @RequestBody Register request
     ) {

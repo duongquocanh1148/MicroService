@@ -3,7 +3,7 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-    <changeSet id="1" author="Anh">
+    <changeSet id="2" author="Anh">
         <createTable tableName="tb_user">
             <column autoIncrement="true" name="id" type="INT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_tb_user"/>
@@ -22,7 +22,7 @@
         <addUniqueConstraint columnNames="email" constraintName="uc_tb_user_email" tableName="tb_user"/>
         <addUniqueConstraint columnNames="username" constraintName="uc_tb_user_username" tableName="tb_user"/>
         <createTable tableName="token">
-            <column name="id" type="INT">
+            <column autoIncrement="true" name="id" type="INT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_token"/>
             </column>
             <column name="token" type="VARCHAR(255)"/>
