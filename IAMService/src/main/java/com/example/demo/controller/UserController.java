@@ -21,7 +21,7 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/admin/users")
-    @RolesAllowed("admin")
+//    @RolesAllowed("admin")
     public ResponseEntity<List<Users>> getAllUser(){
         return  ResponseEntity.ok(userService.getAllUser());
     }
