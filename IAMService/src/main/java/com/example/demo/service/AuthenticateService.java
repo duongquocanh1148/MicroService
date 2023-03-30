@@ -32,11 +32,11 @@ public class AuthenticateService {
                             request.getPassword()
                     )
             );
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+//            SecurityContextHolder.getContext().setAuthentication(authentication);
             Users user = userRepository.findByUserName(request.getUserName())
                     .orElse(null);
             if (user != null) {
-                if (user.isConfirm()){
+                if (user.isConfirm()==true){
                     jwt = jwtService.generateToken(user);
                     saveUserToken(user, jwt);
                     return ResponseObject.builder()
@@ -47,10 +47,15 @@ public class AuthenticateService {
                 } else return ResponseObject.builder()
                         .status("Failed")
                         .message("Tài khoản chưa được kích hoạt.Vui lòng xác minh email")
-                        .data(jwt)
+                        .data(null)
                         .build();
 
-            }
+            } else
+                return ResponseObject.builder()
+                    .status("Failed")
+                    .message("doi tuong rong")
+                    .data("rong")
+                    .build();
         } catch (Exception e) {
             return ResponseObject.builder()
                     .status("Failed")
@@ -59,10 +64,10 @@ public class AuthenticateService {
                     .build();
         }
 
-        return ResponseObject.builder()
-                .status("Failed")
-                .message("Login fail")
-                .build();
+//        return ResponseObject.builder()
+//                .status("Failed")
+//                .message("Login fail")
+//                .build();
     }
 
 
